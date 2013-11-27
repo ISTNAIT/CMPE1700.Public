@@ -71,7 +71,7 @@ namespace SearchComparison
         {
             DateTime startTime = DateTime.Now;
             int location = -1; //Return value
-            int midpoint = startIndex + stopIndex/2 - startIndex/2;  //Weird math for midpoint to avoid overflow
+            int midpoint = startIndex/2 + stopIndex/2;  //Weird math for midpoint to avoid overflow
 
             if (stopIndex < startIndex) //shouldn't happen
                 location = -1;
