@@ -1,4 +1,4 @@
 CMPE1700Demos
 =============
 
-CMPE1700 Demos
+Data Structures and Algorithms Demos
