@@ -57,7 +57,63 @@ namespace Demo_2___Basic_Structures
             Console.WriteLine(new Person()); //Anonymous doomed new Person who exists just long enough to be printed.
             Console.WriteLine(new Person("Sally")); //Same again, but without default ctor.
 
+            Person Bob = new Person("Bob Dobbs", 192.66, 96.3);
+            Bob.gender = Gender.Male;
+            Bob.eyeColor = EyeColor.Green;
+            Bob.age = 42;
+
+            Bob.children = new Person[2];
+            Bob.children[0].name = "Gertrude";
+            Bob.children[0].gender = Gender.Female;
+            Bob.children[1].name = "Fabian";
+            Bob.children[1].gender = Gender.Male;
+
+            Person Emily = new Person("Emily");
+            Emily.children = Bob.children;  //Note! Reference type.  They share the set of kids.
+
+            Console.WriteLine("Emily's second kid is " + Emily.children[1]);
+
+            SexualReassignmentSurgery(Bob);
+
+            Console.WriteLine("But not permanently: " + Bob);
+
+            Bob = SexualReassignmentSurgeryForRealz(Bob);
+
+            Console.WriteLine("Now, permanently:" + Bob);
+
+            Console.WriteLine("If I change the gender of Bob's kid, it happens to Emily's kid, too:");
+
+            Bob.children[1] = SexualReassignmentSurgeryForRealz(Bob.children[1]);
+
+            Console.WriteLine("Emily's kid:" + Emily.children[1]);
+
             Console.Write("Press any Key"); Console.ReadKey();
+              
         }
+
+        static public void SexualReassignmentSurgery(Person person)
+        {
+            Console.Write(person + " has become ");
+            person.gender = (Gender)(((int)person.gender + 1) % 2);
+            //or, like
+           // switch(person.gender)
+                //case Gender.Male
+                    //person.gender = Gender.Female;
+            Console.WriteLine(person);
+        }
+
+        static public Person SexualReassignmentSurgeryForRealz(Person person)
+        {
+            Console.Write(person + " has become ");
+            person.gender = (Gender)(((int)person.gender + 1) % 2);
+            //or, like
+            // switch(person.gender)
+            //case Gender.Male
+            //person.gender = Gender.Female;
+            Console.WriteLine(person);
+            return person;
+        }
+
+
     }
 }
