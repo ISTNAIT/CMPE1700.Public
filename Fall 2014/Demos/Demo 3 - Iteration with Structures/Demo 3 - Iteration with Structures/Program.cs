@@ -18,8 +18,12 @@ namespace Demo_3___Iteration_with_Structures
 
             //First, I need a array big enough to hold all the possibilities:
             int pilotCount = Enum.GetValues(typeof(Aviator)).Length;
-            //Total number of combos is X^2-X or X(X-1), whatever
-            PairedFlight[] flights = new PairedFlight[pilotCount*pilotCount - pilotCount];
+            //Total number of combos is X^2-X or X(X-1), if we care about order
+            //PairedFlight[] flights = new PairedFlight[pilotCount*pilotCount - pilotCount];
+            //If we want to combo so they fly together only once (don't care about order)
+            //(x-1) + (x-2) + (x-3) + .... + 1 =  x * (x-1)/2 
+            PairedFlight[] flights = new PairedFlight[pilotCount * (pilotCount - 1) / 2]; 
+            
             int i = 0;
 
             foreach (Aviator pilot in Enum.GetValues(typeof(Aviator)))
