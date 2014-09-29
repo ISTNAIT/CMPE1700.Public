@@ -15,7 +15,17 @@ namespace Demo_6___Bitwise_Buffoonery
             UInt64 val = 0xDEADBEEF;
             UInt64 val2 = 0xDEADBEEF;
             UInt64 val3 = 0xDEADBEEF;
+            UInt64 val4 = 0u;
             Console.WriteLine("My value in decimal: {0} and hex: {0:x} \nand with all bits, upper: {0:X16}", val);
+
+            Console.Write("Give me a hex number:");
+            string sval = Console.ReadLine();
+            try
+            {
+                val4 = UInt64.Parse(sval, NumberStyles.HexNumber);
+            }
+            catch (Exception ex) { Console.WriteLine("Error: " + ex.Message); }
+            Console.WriteLine("You typed: 0x{0:X}", val4);
         
             //Let's see the third (from least significant) byte:
             byte by = (byte)((val >>= 16) & (0xFF));
