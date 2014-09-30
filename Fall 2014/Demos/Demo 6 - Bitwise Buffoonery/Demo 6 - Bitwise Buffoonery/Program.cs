@@ -9,6 +9,16 @@ namespace Demo_6___Bitwise_Buffoonery
 {
     class Program
     {
+        enum BitFlags //Flags that correspond to exactly one bit set
+        {
+            Tall = 1,  //0001
+            Wealthy = 2, //0010
+            Handsome = 4, //0100
+            Witty = 8, //1000
+            Charming = 16,
+            HasGuitar = 32
+        }
+
         static void Main(string[] args)
         {
             //First, some reminders about i/o
@@ -56,6 +66,20 @@ namespace Demo_6___Bitwise_Buffoonery
             val3 &= Mask;
             Console.WriteLine("Clear every second high order nibble: {0:X}", val3);
             
+            //Playing with bitflags
+
+            int ThatDude =  (int)(BitFlags.Tall | BitFlags.HasGuitar | BitFlags.Handsome);
+
+            if ((ThatDude & (int)BitFlags.Wealthy) != 0)
+                Console.WriteLine("That dude is wealthy.");
+            else
+                Console.WriteLine("Dirt poor.  But salt of the earth."); 
+            
+            if ((ThatDude & (int)BitFlags.Tall) != 0)
+                Console.WriteLine("That dude is Tall.  Kind of a Jeff Goldblum vibe.");
+            else
+                Console.WriteLine("Maybe I can put a beer on his head.");
+
 
             Console.Write("Press any key to continue:");
             Console.ReadKey();
