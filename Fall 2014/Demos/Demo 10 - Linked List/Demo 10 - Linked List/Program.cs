@@ -15,10 +15,13 @@ namespace Demo_10___Linked_List
             Node head = null;
 
             //Generate the list
-            for(int i = 0; i < 100; ++i)
+            for(int i = 0; i < 100000; ++i)
             {
                 //Create a new random node and add it to the end of the list
-                head = ListAddtoEnd(head, r.Next(100));
+               // head = ListAddtoEnd(head, r.Next(100));
+                
+                //Create a new random node and add it in order
+                head = ListAddInOrder(head, r.Next(100));
             }
             PrintList(head);
             Console.WriteLine();
@@ -53,6 +56,37 @@ namespace Demo_10___Linked_List
             //Current.Next.Value is the value of the node after Current.
             //Current.Next.Next.Value is the value of the node after that.  BEWARE OF NULLS!
             //If (Current.Next != Null) will be needed.
+
+
+            //THIS IS THE SOLUTION
+            //Case 1 - Empty list
+            if (head == null)
+            {
+                //Pretty easy
+                Node newNode = new Node(val); //Pretty new node
+                //Aaand that's my whole list, so just return it.
+                return newNode; //This is the new reference to the head of the list.
+            }
+
+            //Case 2 -- Add in front of head of the list (another case where
+            //          we need a new head)
+            if(head.value > val)
+            {
+                Node newHead = new Node(val);
+                newHead.next = head; //Connect to old head.
+                return newHead;
+            }
+
+            //Case 3 -- Belongs somewhere else in the list
+            //If I made it here, then that's the case. No need for an if.
+            //Find my insertion point
+            Node current = head; //Pointer to head
+            while (current.next != null && current.next.value < val) //While my current is not pointing to insert point
+                current = current.next;
+            //Current must now point to my insertion point, so insert
+            Node reallynewNode = new Node(val);
+            reallynewNode.next = current.next;
+            current.next = reallynewNode;
             return head;
 
         }
