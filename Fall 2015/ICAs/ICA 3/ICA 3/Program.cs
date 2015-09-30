@@ -31,7 +31,7 @@ namespace ICA_3
 
             //If I get here, I have a valid number to check parity of.
 
-            Console.WriteLine(CountSetBits(val));
+            Console.WriteLine((CountSetBits(val) % 2 == 1) ? "Odd":"Even");
 
         }
 
