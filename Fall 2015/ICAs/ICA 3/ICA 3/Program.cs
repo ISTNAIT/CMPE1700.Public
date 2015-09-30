@@ -28,9 +28,24 @@ namespace ICA_3
             {
                 Utils.PrintError("Parsing Error on argument \"" + args[0] + "\"", e.Message, true, true, -2);
             }
-            
+
             //If I get here, I have a valid number to check parity of.
 
+            Console.WriteLine(CountSetBits(val));
+
+        }
+
+        static bool setP (ulong val, byte bit)
+        {
+            return (val & (1ul << bit)) != 0;
+        }
+
+        static byte CountSetBits(ulong val)
+        {
+            byte retVal = 0;
+            for (byte i = 0; i < 64; ++i)
+                if (setP(val, i)) ++retVal;
+            return retVal;
         }
     }
 }
