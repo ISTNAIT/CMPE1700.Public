@@ -11,6 +11,7 @@ namespace Demo_3
     {
         static void Main(string[] args)
         {
+            revprint("Algorithms are cool.");
             Console.WriteLine();
             prefixAdd(5);
             Console.WriteLine();
@@ -25,6 +26,13 @@ namespace Demo_3
             Console.WriteLine("This is " + (ispalindrome(sentence) ? "" : "not ") + "a palindrome");
 
             Console.ReadKey();
+        }
+
+        public static void revprint(string text)
+        {
+            if (text == "") return;
+            revprint(text.Remove(0,1));
+            Console.Write(text[0]);
         }
 
         public static string flatten(string input)
