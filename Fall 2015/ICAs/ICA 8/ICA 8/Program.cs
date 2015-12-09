@@ -11,7 +11,7 @@ namespace ICA_8
         static void Main(string[] args)
         {
             Random r = new Random();
-            int collSize = 1000;
+            int collSize = 10;
             
 
             //Create a random array
@@ -41,6 +41,9 @@ namespace ICA_8
             Console.WriteLine();
             Console.WriteLine("List\n====");
             PrintList(head);
+            InsertionSort(ref head);
+            PrintList(head);
+            Console.WriteLine("List is " + (isSorted(head) ? "sorted." : "not sorted."));
 
             //Pause
             Console.ReadKey();
@@ -77,10 +80,47 @@ namespace ICA_8
             return values;
         }
 
-
-        public static Node InsertionSort(Node head)
+        //Sort a linked list
+        public static Node InsertionSort(ref Node head)
         {
-            return head;
+            //Head is the list I want to sort.
+            //Sorted is the new list I will build with insertions.
+            Node sorted = null;
+            Node newhead = null;
+            Node insertpoint = null;
+            while (head != null)
+            {
+                //The node currently at head needs to be sorted in.
+                //Find the location in sorted where I want this
+
+                //Add to head of sorted?
+                if(sorted == null || sorted.Value > head.Value)
+                {
+                    //add to head
+                    newhead = head.Next;
+                    head.Next = sorted; //Insert sorted list after head
+                    //Clean up pointers
+                    sorted = head;
+                    head = newhead;
+                }
+
+                //Otherwise, find insertion point
+                else
+                {
+                    insertpoint = sorted;
+                    while (insertpoint.Next != null && insertpoint.Next.Value < head.Value)
+                        insertpoint = insertpoint.Next;
+                    //insertpoint now at node before where I want to sort
+                    newhead = head.Next;
+                    head.Next = insertpoint.Next;
+                    insertpoint.Next = head;
+                    //Clean up pointers
+                    head = newhead;
+                }
+            }
+            //head is null right now.
+            head = sorted;
+            return sorted;
         }
 
         public static void PrintArray(int[] values)
@@ -105,6 +145,13 @@ namespace ICA_8
             for (int i = 0; i < values.Length - 1; ++i)
                 if (values[i] > values[i + 1]) return false;
             return true;
+        }
+
+        public static bool isSorted(Node head)
+        {
+            if (head == null) return true;
+            if (head.Next == null) return true;
+            return ((head.Next.Value >= head.Value) && isSorted(head.Next));
         }
     }
 }
