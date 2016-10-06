@@ -6,7 +6,7 @@ all:main
 main: main.o arrays.o
 	$(CC) main.o arrays.o -o arraydemo
 
-main.o: main.c arrays.c arrays.h
+main.o: main.c arrays.h
 	$(CC) $(CFLAGS) -c main.c
 
 arrays.o: arrays.c arrays.h
@@ -17,3 +17,6 @@ clean:
 
 debug: all
 	cgdb arraydemo
+
+ddd: all
+	ddd arraydemo
