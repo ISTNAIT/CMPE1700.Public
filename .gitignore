@@ -1,3 +1,10 @@
+#Emacs debris
+*~
+
+#C Temporary files and compile products
+*.o
+*.exe
+
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
 [Oo]bj/
