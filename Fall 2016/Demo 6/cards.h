@@ -21,13 +21,17 @@ typedef struct card
   Face face; //Ditto
 } Card;
 
+//Comparisons
+int equal(Card one, Card two);
+int lessthan(Card one, Card two);
+
 //Take a deck of 52 cards and set them to the appropriate
 //52 distinct cards
 void PopulateDeck(Card deck[]);
 
 //Create a populatated deck of 52 cards on the heap
 Card * AllocateDeck();
-
+Card RandomCard();
 void PrintCard(Card c);
 void PrintCards(Card deck[], uint size);
 void SwapCards(Card deck[], uint first, uint second);

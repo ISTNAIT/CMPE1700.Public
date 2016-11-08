@@ -23,9 +23,20 @@ int main()
   printf("\nShuffled Deck:\n" );
   PrintCards(deck,52);
 
+  Card key = RandomCard();
+  int location = SeqSearch(key,deck,52);
+  printf("Card ");
+  PrintCard(key);
+  printf(" is at location %d.\n",location);
+
   Sort(deck,52);
   printf("\nSorted Deck:\n" );
   PrintCards(deck,52);
+  location = BinSearch(key,deck,0,51);
+  printf("Card ");
+  PrintCard(key);
+  printf(" is at location %d.\n",location);
+
 
   if(deck)
   {

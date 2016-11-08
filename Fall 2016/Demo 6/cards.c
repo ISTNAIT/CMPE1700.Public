@@ -68,6 +68,15 @@ void PrintCards(Card deck[], uint size)
   printf("\n");
 }
 
+//Generate a random card
+Card RandomCard()
+{
+  Card c;
+  c.suit = rand()%4;
+  c.face = rand()%13 + 1;
+  return c;
+}
+
 //Swap two cards
 void SwapCards(Card deck[], uint first, uint second)
 {
@@ -94,4 +103,17 @@ uint FindSmallest(Card deck[], uint first, uint last)
     }
   }
   return smallest;
+}
+
+int equal(Card one, Card two)
+{
+  if(one.face == two.face && one.suit == two.suit) return 1;
+  return 0;
+}
+
+int lessthan(Card one, Card two)
+{
+  if(one.suit < two.suit) return 1;
+  if(one.suit == two.suit && one.face < two.face) return 1;
+  return 0;
 }
