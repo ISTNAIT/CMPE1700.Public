@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Diagnostics;
+using System.Threading;
 using GDIDrawer;
 
 
@@ -45,17 +46,28 @@ namespace Demo_4___Flood_Fill
 
         static void FloodFill(Point pos, Color col)
         {
+            //Base Cases:
+            //Is my position off-canvas to right or bottom
             if (pos.X >= Draw.ScaledWidth || pos.Y >= Draw.ScaledHeight) return;
+            //Is this position off-canvas to top or left
             if (pos.X < 0 || pos.Y < 0) return;
+
+            //What is the color of my current pixel
             Color Pixel = Draw.GetBBPixel(pos.X * Draw.Scale, pos.Y * Draw.Scale);
             bool IsBlack = (Pixel.R == 0 && Pixel.G == 0 && Pixel.B == 0);
+            //If it's already colored, we're done (for now)
             if (!IsBlack) return;
 
+            //Color the pixel
             Draw.SetBBScaledPixel(pos.X, pos.Y, col);
+            Thread.Sleep(100);
+            //Launch Floodfill for my 4 neighbors
             FloodFill(new Point(pos.X + 1, pos.Y), col);
             FloodFill(new Point(pos.X - 1, pos.Y), col);
             FloodFill(new Point(pos.X, pos.Y + 1), col);
             FloodFill(new Point(pos.X, pos.Y - 1), col);
+            
+            
         }
 
         static void AddBBLineScaled(Point start, Point end, Color col)
