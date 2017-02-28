@@ -25,6 +25,9 @@ namespace Demo_6
         //Grow by a factor
         public static Vector Grow(Vector vec, int factor = 2)
         {
+            if (factor < 2)
+                throw new 
+                    ArgumentOutOfRangeException("Grow factor must be at least 2");
             if (Debugger.IsAttached)
             {
                 Console.WriteLine("Growing vector from size "
@@ -44,6 +47,10 @@ namespace Demo_6
         //Add to end
         public static Vector Add(Vector vec, int value)
         {
+            //Check if the vector I got is valid...
+            if(vec.Store == null)
+                throw new NullReferenceException("Vector store is null");
+
             //Do I need to grow?
             if (vec.Size == vec.Max) vec = Grow(vec);
             vec.Store[vec.Size] = value;
