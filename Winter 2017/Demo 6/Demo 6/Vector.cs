@@ -57,5 +57,16 @@ namespace Demo_6
             vec.Size++;
             return vec;
         }
+
+
+        static public Vector Insert(Vector v, int value, int index)
+        {
+            return v;
+        }
+
+        static public Vector Delete(Vector v, int index)
+        {
+            return v;
+        }
     }
 }
