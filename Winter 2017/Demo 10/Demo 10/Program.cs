@@ -11,16 +11,16 @@ namespace Demo_10
     {
         static void Main(string[] args)
         {
-            const int SetSize = 100000000;
+            const int SetSize = 100;
             Random r = new Random();
             List<int> Set = new List<int>(SetSize);
             for (int i = 0; i < SetSize; ++i)
                 Set.Add(r.Next(SetSize));
 
-            //PrintList(Set);
+            PrintList(Set);
             Console.WriteLine("******");
             Set = MergeSort(Set);
-            //PrintList(Set);
+            PrintList(Set);
             Console.WriteLine("******");
             if (pSorted(Set))
                 Console.WriteLine("Woohoo!");
