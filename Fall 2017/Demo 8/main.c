@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     //could do that with a structure, but we can also do it with a parallel
     //array.  I'll just create one using DMA (more on that later)
 
-    direct = (int *) malloc (strlen(argv[1])); //Space to store ints.
+    direct = (int *) malloc (4 * strlen(argv[1])); //Space to store ints.
     //Initialize everything as going left
     for(int i = 0; i < strlen(argv[1]); ++i)
         direct[i] = -1;
