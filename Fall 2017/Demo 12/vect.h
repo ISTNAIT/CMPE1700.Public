@@ -21,4 +21,11 @@ Vector Release(Vector v);
 //Add an item to end of Vector.  May call grow.
 Vector Add(Vector v, int val);
 
+//Insert an item that will be at location loc.
+Vector Insert(Vector v, int val, int loc);
+
+//Insert an item before the first item greater than
+//its value
+Vector InsertInOrder(Vector v, int val);
+
 #endif
