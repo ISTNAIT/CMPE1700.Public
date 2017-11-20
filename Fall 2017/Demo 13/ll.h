@@ -10,6 +10,12 @@ typedef struct node
     struct node * next;
 }Node;
 
+
+void PrintList(Node * head);
+
+Node * Delete(Node * head);
+
+
 //Add an item to end of List.
 Node * Add(Node * head, int val);
 
