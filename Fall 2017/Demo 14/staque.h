@@ -13,6 +13,15 @@ typedef struct staque
     int max; //Maximum number of elements in store (bottom < max)
 }Staque;
 
+//Sort using selection sort
+void Sort(Staque sq);
+
+//Sort using quicksort
+void QuickSort(Staque sq, int first, int last);
+
+//Search using bsearch.  Returns index of item or -1 for not found
+int BSearch(Staque sq, int val, int first, int last);
+
 //Get the value loc after the first item
 int Get(Staque sq, int loc);
 
@@ -36,7 +45,7 @@ Staque Pop(Staque sq, int * pval);
 //also move data to front
 Staque Grow(Staque sq);
 
-//Release dma'd memory.  Should return NULL.
+//Release dma'd memory.  Should return NULL'd store.
 Staque Release(Staque sq);
 
 //Add an item to end of Staque.  May call grow.

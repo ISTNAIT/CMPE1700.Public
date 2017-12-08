@@ -3,6 +3,99 @@
 #include "staque.h"
 
 
+//Sort using selection sort
+void Sort(Staque sq)
+{
+    //Iterate through places from front, moving smallest item in remaining set
+    for(int i = sq.top;i < sq.bottom; ++i)
+    {
+        //Assume first one is smallest
+        int smallest = i;
+        //See if we're wrong about that
+        for(int j = i + 1; j < sq.bottom; ++j)
+            if(sq.store[j] < sq.store[smallest])
+                smallest = j;
+        //Swap if necessary
+        if(smallest != i)
+        {
+            int temp = sq.store[i];
+            sq.store[i] = sq.store[smallest];
+            sq.store[smallest] = temp;
+        }
+    }
+    return;
+}
+
+//Sort using quicksort
+void QuickSort(Staque sq, int first, int last)
+{
+    //This version uses some int pointers, instead of index values,
+    //because I already had some code lying around.
+    //Remember: the first virtue of an engineer is laziness
+    int iTemp = 0;
+    if(last-first>2)
+    {
+        int * piPivot = &(sq.store[first]); //Pivot Location
+        int * piLeft = &(sq.store[first+1]);//Left Pointer
+        int * piRight =&(sq.store[last-1]);//Right Pointer
+        while(piLeft < piRight)//Unutil pointers meet
+        {
+            while((*piRight>=*piPivot) && (piLeft<piRight))
+            {
+                piRight--;//Find right item in wrong set
+            }
+            while((*piLeft<=*piPivot) && (piLeft<piRight))
+            {
+                piLeft++;//Find left item in wrong set
+            }
+            if (*piLeft > *piRight)
+            {
+                //Swap left and right if out of order
+                iTemp = *piRight;
+                *piRight = * piLeft;
+                *piLeft = iTemp;
+            }
+        }
+        //Move pivot into proper location
+        if(*piPivot > * piLeft) //Make sure pivot shouldn't be at far left
+        {
+            iTemp = *(piLeft);
+            *(piLeft) = *piPivot;
+            *piPivot=iTemp;
+        }
+        else //pivot was smallest
+            piLeft=piPivot;
+        //Call quicksort on two sublists
+        int pivotloc = first + (piLeft - piPivot); //Pointer arithmetic to find offset
+        QuickSort(sq,first,pivotloc);
+        QuickSort(sq,pivotloc+1,last);
+    }
+    else if (last-first == 2) //Trivial list - not enough for three distinct pointers.
+    {
+        if(sq.store[first]>sq.store[first+1])//Sort if out of order
+        {
+            iTemp=sq.store[first+1];
+            sq.store[first+1]=sq.store[first];
+            sq.store[first]=iTemp;
+        }
+    }
+    return;
+}
+
+
+//Search using bsearch.  Returns index of item or -1 for not found
+//NB: last is one AFTER the range being searched
+int BSearch(Staque sq, int val, int first, int last)
+{
+    if (last-first < 1) return -1; //Empty
+    if (last==first+1) return (sq.store[first]==val?first:-1);//One item
+    int mid = (first + last - 1)/2;
+    if(sq.store[mid] == val) return mid;
+    if(sq.store[mid] > val) return BSearch(sq, val, first, mid);
+    return BSearch(sq, val, mid+1, last);
+}
+
+
 //Get the value loc after the first item
 //Return 0 if invalid location
 int Get(Staque sq, int loc)
@@ -73,7 +166,7 @@ Staque Grow(Staque sq)
     //I have an existing one.  Do I need a new one?
     if(Size(sq) * 2 > sq.max)
     {
-        printf("Growing staque from %d to %d\n",sq.max,Size(sq)*2);
+        //printf("Growing staque from %d to %d\n",sq.max,Size(sq)*2);
         sp.max = Size(sq)*2;
         sp.store = (int *) malloc(sizeof(int)*sp.max);
         if(!sp.store)//Didn't get memory for some reason
