@@ -41,5 +41,15 @@ int main(int argc, char** argv)
     printf("The sum of %d and %d is %d\n", arg1, arg2, arg1+arg2);
     printf("ARE WE NOT GODS?!\n");
     fflush(stdout);
+
+#ifdef DEBUG
+//Pause to avoid console closing in debug mode.
+//Because Microsoft sucks.
+    fflush(stdin); //Make sure there's nothing lurking in the buffer.
+    printf("\nPress Enter to Exit:");
+    fflush(stdout);
+    fgetc(stdin);
+#endif //DEBUG
+
     return 0;
 }
