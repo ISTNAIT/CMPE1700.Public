@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo 8 - DMA", "Demo 8 - DMA\Demo 8 - DMA.vcxproj", "{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Debug|x64.ActiveCfg = Debug|x64
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Debug|x64.Build.0 = Debug|x64
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Debug|x86.ActiveCfg = Debug|Win32
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Debug|x86.Build.0 = Debug|Win32
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Release|x64.ActiveCfg = Release|x64
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Release|x64.Build.0 = Release|x64
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Release|x86.ActiveCfg = Release|Win32
+		{D43ECBE8-8FA1-4C3B-B75E-D31FBAEE9C71}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CFAEF53C-7C13-491A-9DA9-4E2A2A355F04}
+	EndGlobalSection
+EndGlobal
