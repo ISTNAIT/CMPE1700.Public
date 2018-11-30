@@ -18,6 +18,7 @@ typedef struct node Node;
 
 Node * AddToHead(Node * head, int val);
 Node * AddToTail(Node * head, int val);
+Node * AddInOrder(Node * head, int val);
 Node * CleanUp(Node * head);
 void PrintList(Node * head);
 

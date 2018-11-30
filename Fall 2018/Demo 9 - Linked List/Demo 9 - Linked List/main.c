@@ -15,8 +15,9 @@ int main(int argc, char** argv)
 
 	for (int i = 0; i < 10; ++i)
 	{
-		if (i % 2) head = AddToHead(head,rand()%1000);
-		else head = AddToTail(head,rand()%1000);
+		//if (i % 2) head = AddToHead(head,rand()%1000);
+		//else head = AddToTail(head,rand()%1000);
+		head = AddInOrder(head, rand() % 10);
 	}
 
 	PrintList(head);
