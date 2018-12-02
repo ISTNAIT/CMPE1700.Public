@@ -69,7 +69,6 @@ Node * AddInOrder(Node * head, int val)
 		fprintf(stderr, "Gurgle. Dying...");
 		exit(EXIT_FAILURE);
 	}
-
 	newby->value = val;
 	//Hand off balloon string
 	newby->next = ip->next;
