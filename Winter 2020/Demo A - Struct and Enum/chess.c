@@ -4,7 +4,7 @@
 #include "chess.h"
 
 //Populate my Pieces buffer with a complete set.
-ChessPiece* GetPeices(ChessPiece* pieces)
+ChessPiece* GetPieces(ChessPiece* pieces)
 {
 	//Create an array (declared in header)
 	//That contains a complete set.
@@ -26,8 +26,10 @@ ChessPiece* GetPeices(ChessPiece* pieces)
 		}
 
 		//One each of queen, king
-		pieces[index++] = (ChessPiece){ c,queen,1,'a',c ? '♛' : '♕' };
-		pieces[index++] = (ChessPiece){ c,king,1,'a',c ? '♚' : '♔' };
+		pieces[index++] = (ChessPiece){ c,queen,c ? 8:1, 'd',
+			c ? '♛' : '♕' };
+		pieces[index++] = (ChessPiece){ c,king,c ? 8 : 1,'a',
+			c ? '♚' : '♔' };
 	}
 	//Now, fix locations. 
 	length = index;
@@ -43,6 +45,13 @@ ChessPiece* GetPeices(ChessPiece* pieces)
 		case rook:
 			pieces[i].symbol = pieces[i].colour ? '♖':'♜';
 			pieces[i].rank = pieces[i].colour ? 1 : 8;
+		case bishop:
+			pieces[i].symbol = pieces[i].colour ? '♗' : '♝';
+			pieces[i].rank = pieces[i].colour ? 1 : 8;
+		case knight:
+			pieces[i].symbol = pieces[i].colour ? '♘' : '♞';
+			pieces[i].rank = pieces[i].colour ? 1 : 8;
+		case queen: case king: break; //Should already be correct.
 		default:
 			fprintf(stderr, "Error: Elder gods have"
 				"infested board. Aborting.\n");

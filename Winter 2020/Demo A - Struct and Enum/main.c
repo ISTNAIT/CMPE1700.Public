@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv)
 {
-	GetPeices(Pieces);
+	GetPieces(Pieces);
 
 	return EXIT_SUCCESS;
 }
