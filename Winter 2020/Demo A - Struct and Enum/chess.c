@@ -15,21 +15,21 @@ ChessPiece* GetPieces(ChessPiece* pieces)
 		//Eight Pawns
 		for (int i = 0; i < 8; ++i)
 		{
-			pieces[index++] = (ChessPiece){ c,pawn,1,'a',c ? '♟' : '♙' };
+			pieces[index++] = (ChessPiece){ c,pawn,1,'a',c ? L'♟' : L'♙' };
 		}
 
 		//Two each of rook, bishop, knight
 		for (PieceType pt = rook; pt <= knight; ++pt)
 		{
-			pieces[index++] = (ChessPiece){ c,pt,1,'a','💩' };
-			pieces[index++] = (ChessPiece){ c,pt,1,'a','💩' };
+			pieces[index++] = (ChessPiece){ c,pt,1,'a',L'💩' };
+			pieces[index++] = (ChessPiece){ c,pt,1,'a',L'💩' };
 		}
 
 		//One each of queen, king
-		pieces[index++] = (ChessPiece){ c,queen,c ? 8:1, 'd',
-			c ? '♛' : '♕' };
-		pieces[index++] = (ChessPiece){ c,king,c ? 8 : 1,'a',
-			c ? '♚' : '♔' };
+		pieces[index++] = (ChessPiece){ c,queen,c ? 8 : 1 , 'd',
+			c ? L'♛' : L'♕' };
+		pieces[index++] = (ChessPiece){ c,king,c ? 8 : 1 , 'e',
+			c ? L'♚' : L'♔' };
 	}
 	//Now, fix locations. 
 	length = index;
@@ -39,28 +39,46 @@ ChessPiece* GetPieces(ChessPiece* pieces)
 		{
 		case pawn:
 			//I know I have eight pawns, first eight white, second black
-			pieces[i].rank = pieces[i].colour ? 2 : 7;
-			pieces[i].file = i % 8; //Fancy idiom.  Why does this work?
+			pieces[i].rank = pieces[i].colour ? 7 : 2;
+			pieces[i].file = 'a' + i % 8; //Fancy idiom.  Why does this work?
 			break;
 		case rook:
-			pieces[i].symbol = pieces[i].colour ? '♖':'♜';
-			pieces[i].rank = pieces[i].colour ? 1 : 8;
+			pieces[i].symbol = pieces[i].colour ? L'♖':L'♜';
+			pieces[i].rank = pieces[i].colour ? 8 : 1;
 		case bishop:
-			pieces[i].symbol = pieces[i].colour ? '♗' : '♝';
-			pieces[i].rank = pieces[i].colour ? 1 : 8;
+			pieces[i].symbol = pieces[i].colour ? L'♗' : L'♝';
+			pieces[i].rank = pieces[i].colour ? 8 : 1;
 		case knight:
-			pieces[i].symbol = pieces[i].colour ? '♘' : '♞';
-			pieces[i].rank = pieces[i].colour ? 1 : 8;
+			pieces[i].symbol = pieces[i].colour ? L'♘' : L'♞';
+			pieces[i].rank = pieces[i].colour ? 8 : 1;
 		case queen: case king: break; //Should already be correct.
 		default:
 			fprintf(stderr, "Error: Elder gods have"
 				"infested board. Aborting.\n");
 			exit(EXIT_FAILURE);
 		}
-
 	}
+	return pieces;
+}
 
-	return Pieces;
+void PopulateBoard(ChessPiece Pieces[], wchar_t Board[])
+{
+	for (int i = 0; i < 32; ++i)
+	{
+		int offsetrank = (Pieces[i].rank - 1) * 8;
+		int offsetfile = (Pieces[i].file - 'a');
+		Board[offsetrank + offsetfile] = Pieces[i].symbol;
+	}
+}
+
+void PrintBoard(wchar_t Board[])
+{
+	for (int ra = 7; ra >= 0; ra--)
+	{
+		for (int fi = 0; fi < 8; fi++)
+			printf(Board[ra*8 + fi]);
+		printf('\n');
+	}
 }
 
 int ReinFieldValue(ChessPiece cp)

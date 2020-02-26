@@ -27,11 +27,11 @@ typedef struct
 static const char* Names[] = { "Pawn","Rook","Bishop","Knight", "Queen", "King" };
 //Look-up table for piece colours.
 static const char* Colours[] = { "White","Black" };
-//Reserve memory for an array of Pieces so that we don't need DMA
-ChessPiece Pieces[32];
+
 
 int ReinFieldValue(ChessPiece cp); //Scoring
-char* Name(ChessPiece cp); //Get string name for a pieces
+char* Name(ChessPiece cp); //Get string name for a peice
 char* ColourName(ChessPiece cp); //Get string name for colour.
-
+void PopulateBoard(ChessPiece Pieces[], wchar_t Board[]); 
+void PrintBoard(wchar_t Board[]);
 #endif
