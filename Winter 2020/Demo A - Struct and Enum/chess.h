@@ -2,6 +2,7 @@
 #ifndef CHESSH
 #define CHESSH
 #include <ctype.h>
+#include <wchar.h>
 
 typedef unsigned int uint;
 typedef enum { white, black } Colour;
@@ -24,14 +25,14 @@ typedef struct
 } ChessPiece;
 
 //Look-up table for piece names.
-static const char* Names[] = { "Pawn","Rook","Bishop","Knight", "Queen", "King" };
+static char const * const Names[] = { "Pawn","Rook","Bishop","Knight", "Queen", "King" };
 //Look-up table for piece colours.
-static const char* Colours[] = { "White","Black" };
+static char const * const Colours[] = { "White","Black" };
 
 
 int ReinFieldValue(ChessPiece cp); //Scoring
 char* Name(ChessPiece cp); //Get string name for a peice
 char* ColourName(ChessPiece cp); //Get string name for colour.
-void PopulateBoard(ChessPiece Pieces[], wchar_t Board[]); 
+void PopulateBoard(ChessPiece Pieces[], wchar_t Board[]);
 void PrintBoard(wchar_t Board[]);
 #endif

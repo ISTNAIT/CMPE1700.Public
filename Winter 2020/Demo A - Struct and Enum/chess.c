@@ -32,7 +32,7 @@ ChessPiece* GetPieces(ChessPiece* pieces)
 		pieces[index++] = (ChessPiece){ c,king,c ? 8 : 1 , 'e',
 			c ? L'♚' : L'♔' };
 	}
-	//Now, fix locations. 
+	//Now, fix locations.
 	length = index;
 	for (int i = 0; i < length; ++i)
 	{
@@ -108,8 +108,8 @@ char* Name(ChessPiece cp) //Get string name for a peices
 {
 	return Names[cp.name];
 }
+
 char* ColourName(ChessPiece cp) //Get string name for colour.
 {
-	return cp.colour ? "Black" : "White";
+	return Colours[cp.colour];
 }
-
