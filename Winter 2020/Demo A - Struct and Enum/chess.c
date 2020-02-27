@@ -15,7 +15,8 @@ ChessPiece* GetPieces(ChessPiece* pieces)
 		//Eight Pawns
 		for (int i = 0; i < 8; ++i)
 		{
-			pieces[index++] = (ChessPiece){ c,pawn,1,'a',c ? L'♟' : L'♙' };
+			pieces[index++] = (ChessPiece){ c,pawn,c ? 7 : 2,
+				'a' + index % 8 ,c ? L'♟' : L'♙' };
 		}
 
 		//Two each of rook, bishop, knight
@@ -43,14 +44,20 @@ ChessPiece* GetPieces(ChessPiece* pieces)
 			pieces[i].file = 'a' + i % 8; //Fancy idiom.  Why does this work?
 			break;
 		case rook:
-			pieces[i].symbol = pieces[i].colour ? L'♖':L'♜';
+			pieces[i].symbol = pieces[i].colour ? L'♜':L'♖';
 			pieces[i].rank = pieces[i].colour ? 8 : 1;
+			pieces[i].file = (i % 2) ? 'a' : 'h';
+			break;
 		case bishop:
-			pieces[i].symbol = pieces[i].colour ? L'♗' : L'♝';
+			pieces[i].symbol = pieces[i].colour ? L'♝' : L'♗';
 			pieces[i].rank = pieces[i].colour ? 8 : 1;
+			pieces[i].file = (i % 2) ? 'c' : 'f';
+			break;
 		case knight:
-			pieces[i].symbol = pieces[i].colour ? L'♘' : L'♞';
+			pieces[i].symbol = pieces[i].colour ? L'♞' : L'♘';
 			pieces[i].rank = pieces[i].colour ? 8 : 1;
+			pieces[i].file = (i % 2) ? 'b' : 'g';
+			break;
 		case queen: case king: break; //Should already be correct.
 		default:
 			fprintf(stderr, "Error: Elder gods have"
@@ -73,11 +80,12 @@ void PopulateBoard(ChessPiece Pieces[], wchar_t Board[])
 
 void PrintBoard(wchar_t Board[])
 {
+	wprintf(L"\n");
 	for (int ra = 7; ra >= 0; ra--)
 	{
 		for (int fi = 0; fi < 8; fi++)
-			printf(Board[ra*8 + fi]);
-		printf('\n');
+			wprintf(L" %lc ", Board[ra*8 + fi]);
+		wprintf(L"\n\n");
 	}
 }
 
