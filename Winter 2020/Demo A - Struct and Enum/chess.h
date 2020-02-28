@@ -25,9 +25,9 @@ typedef struct
 } ChessPiece;
 
 //Look-up table for piece names.
-static char const * const Names[] = { "Pawn","Rook","Bishop","Knight", "Queen", "King" };
+static char * const Names[] = { "Pawn","Rook","Bishop","Knight", "Queen", "King" };
 //Look-up table for piece colours.
-static char const * const Colours[] = { "White","Black" };
+static char * const Colours[] = { "White","Black" };
 
 
 int ReinFieldValue(ChessPiece cp); //Scoring

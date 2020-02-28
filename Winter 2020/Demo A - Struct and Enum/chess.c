@@ -1,6 +1,7 @@
 ﻿#include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <locale.h>
 #include "chess.h"
 
 //Populate my Pieces buffer with a complete set.
@@ -80,13 +81,14 @@ void PopulateBoard(ChessPiece Pieces[], wchar_t Board[])
 
 void PrintBoard(wchar_t Board[])
 {
-	wprintf(L"\n");
-	for (int ra = 7; ra >= 0; ra--)
-	{
-		for (int fi = 0; fi < 8; fi++)
-			wprintf(L" %lc ", Board[ra*8 + fi]);
-		wprintf(L"\n\n");
-	}
+    setlocale(LC_ALL, "en_CA.UTF-8");
+    wprintf(L"\n");
+    for (int ra = 7; ra >= 0; ra--)
+    {
+        for (int fi = 0; fi < 8; fi++)
+            wprintf(L" %lc ", Board[ra*8 + fi]);
+        wprintf(L"\n\n");
+    }
 }
 
 int ReinFieldValue(ChessPiece cp)
