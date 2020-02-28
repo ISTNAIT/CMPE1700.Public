@@ -81,6 +81,9 @@ void PopulateBoard(ChessPiece Pieces[], wchar_t Board[])
 
 void PrintBoard(wchar_t Board[])
 {
+    //Set the locale so that unicode pages are available
+    //(Os has to have that locale available.  Mine does.)
+
     setlocale(LC_ALL, "en_CA.UTF-8");
     wprintf(L"\n");
     for (int ra = 7; ra >= 0; ra--)
