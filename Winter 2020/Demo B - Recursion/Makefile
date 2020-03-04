@@ -3,20 +3,20 @@ CFLAGS=-g -Wall
 
 all:main
 
-main: main.o chess.o
-	$(CC) main.o chess.o -o chess
+main: main.o recursion.o
+	$(CC) main.o recursion.o -o recur
 
-main.o: main.c chess.h
+main.o: main.c recursion.h
 	$(CC) $(CFLAGS) -c main.c
 
-chess.o: chess.c chess.h
-	$(CC) $(CFLAGS) -c chess.c
+recursion.o: recursion.c recursion.h
+	$(CC) $(CFLAGS) -c recursion.c
 
 clean:
-	rm -f *.o *~ chess
+	rm -f *.o *~ recur
 
 debug: all
-	cgdb ./chess
+	cgdb ./recur
 
 ddd: all
-	ddd ./chess
+	ddd ./recur
