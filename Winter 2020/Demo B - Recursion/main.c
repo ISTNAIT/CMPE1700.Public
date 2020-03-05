@@ -4,12 +4,14 @@
 
 int main(int argc, char** argv)
 {
+    double result = 0.0;
     if (argc != 2)
     {
-        fprintf(stderr, "%s requires a single argument\n",argv[0] )
+        fprintf(stderr, "%s requires a single argument\n",argv[0] );
         return EXIT_FAILURE;
     }
 
-    printf("\n%s - $d\n", argv[1], PrefixCalc(argv[1],0));
+    PrefixCalc(argv[1], &result);
+    printf("%f\n",result);
     return EXIT_SUCCESS;
 }
