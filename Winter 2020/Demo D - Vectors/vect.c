@@ -13,7 +13,7 @@ int Value(Vect* v, int index) //Return the value of the item at index.
     return v->store[index];
 }
 
-void Grow(Vect * v,  int scale , int verbose)//Increase size of store by factor of scale
+void Grow(Vect * v,  int scale , int verbose)//Incr. store size by scale factor
 {
     //Verbose flag forces logging to console
     int newCapacity = v->capacity * scale;
@@ -49,7 +49,7 @@ void Add(Vect *v, int val, int verbose ) //Add value to end of store.
 {
     //NB: Verbose flag passed to grow to make it chatty or not
     //Make sure I have room.
-    if(v->size >= v->capacity) Grow(&v,2,verbose);
+    if(v->size >= v->capacity) Grow(v,2,verbose);
     v->store[v->size] = val; //add at end
     v->size++;
 }
