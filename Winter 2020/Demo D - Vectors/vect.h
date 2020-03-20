@@ -2,6 +2,8 @@
 #ifndef VECTH
 #define VECTH
 
+#include <stdio.h>
+
 //Use a macro constant to set the starting capacity of
 //new vectors.
 //NOTE: NO SEMICOLON AFTER MACROS. Semicolon will break things
@@ -28,8 +30,9 @@ struct Vect //Wrapper around a Vector of int
 
 //Below are the API functions for my Vector type.
 
-int Value(Vect v, int index); //Return the value of the item at index.
-void Add(Vect v, int val); //Add value to end of store.
-void Grow(Vect v, int scale); //Increase size of store by factor of scale
-void Print(Vect v, File * stream); //Print the content of v to stream.
+int Value(Vect* v, int index); //Return the value of the item at index.
+void Add(Vect* v, int val, int verbose); //Add value to end of store.
+void Grow(Vect* v, int scale, int verbose); //Increase size by scale factor
+void Print(Vect* v, FILE * stream); //Print the content of v to stream.
+
 #endif
