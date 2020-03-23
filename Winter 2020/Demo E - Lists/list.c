@@ -1,63 +1,70 @@
-#include "vect.h"
+#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-int Value(Vect* v, int index) //Return the value of the item at index.
+//Add in order (insert in front of first value > val).
+Node* Add(Node * head, int val);
+
+//Add to location n means node will be nth (head is 0th).
+//0 means add in front of head
+//n > length of the list means add at end
+//n < 0 we will interpret as 'add at end'
+Node* AddAt(Node * head, int val, int loc)
 {
-    if(index < 0 || index >= v->capacity)
+    //Working pointer
+    Node * curr = NULL;
+    //Allocate new node.
+    Node * new = (Node *) malloc (sizeof Node);
+    if(!new){fprintf(STDERR,"Error allocating memory for node."); exit EXIT_FAILURE;}
+    new->next = NULL;
+    new->value = val;
+
+    //Special case---am I inserting at the beginning?
+    if (!head or !loc)
     {
-        fprintf(stderr, "Error: Attempt to access memory out-of-bounds");
-        exit(EXIT_FAILURE);
+        new->next = head; //Link in front of current head
+        return new; //Return new head
     }
 
-    return v->store[index];
-}
-
-void Grow(Vect * v,  int scale , int verbose)//Incr. store size by scale factor
-{
-    //Verbose flag forces logging to console
-    int newCapacity = v->capacity * scale;
-
-    if(!v->store || newCapacity < VECTOR_INITIAL_CAPACITY)//Need to initialize
-        newCapacity = VECTOR_INITIAL_CAPACITY;
-
-    if(verbose) printf("Increasing store size to %d\n",newCapacity);
-
-    //Get some new memory
-    int* newStore = (int*)malloc(sizeof(int) * newCapacity);
-    if(!newStore)
+    //Next special case---insert at the end.
+    if(loc < 0)
     {
-        fprintf(stderr, "Error: Unable to reserve memory for growth.");
-        exit(EXIT_FAILURE);
+        //Find the end
+        curr = head;
+        while (curr->next) //Not at the end yest
+            curr = curr->next;
+        //add new after the end.
+        curr->next = new;
+        return head;
     }
 
-    //Copy old store into new
-    for(int i = 0; i < v->size; ++i)
-        newStore[i] = v->store[i];
-
-    //release old memory (Make sure you do this before you change the pointer)
-    if (v->store) free(v->store); //Don't try to free a null pointer.
-
-    //Point to new store
-    v->store = newStore;
-
-    //Reset capacity
-    v->capacity = newCapacity;
+    //Other than that, just start counting.
+    curr = head; //Start with head
+    while(curr->next && --loc) //keep going to end or loc steps
+        curr=curr->next;
+    //at this point I am either at the last node (curr->next is 0)
+    //or pointing at the node loc nodes after head.
+    //insert after this position:
+    new->next = curr->next;
+    curr->next = new;
+    return head;
 }
 
-void Add(Vect *v, int val, int verbose ) //Add value to end of store.
+//Returns a pointer to the first node with value, or NULL
+Node* Find(Node * head, int val)
 {
-    //NB: Verbose flag passed to grow to make it chatty or not
-    //Make sure I have room.
-    if(v->size >= v->capacity) Grow(v,2,verbose);
-    v->store[v->size] = val; //add at end
-    v->size++;
+    //This is kind of fancy.  Think about how it would work
+    return (head && val==head->value) ? head :
+        head ? Find (head->next, val)
+        : NULL;
 }
 
-void Print(Vect *v , FILE* stream )//Print the content of v to stream.
-{
-    if(stream)
-        for (int i = 0; i < v->size; ++i)
-            fprintf(stream,"%d ", v->store[i]);
-    fprintf(stream,"\n");
-}
+//Delete the node at loc.  Interpret loc as above, except
+//attempt to delete node after end of list will be ignored.
+Node* RemoveAt(Node * Head, int val, int loc);
+
+//Recursive traversal print
+void  Print (Node * head);
+
+//Recursive traversal free memory
+void  Free(Node * head);

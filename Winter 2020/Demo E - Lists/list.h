@@ -1,38 +1,56 @@
 #pragma once
-#ifndef VECTH
-#define VECTH
+#ifndef LISTH
+#define LISTH
 
 #include <stdio.h>
 
-//Use a macro constant to set the starting capacity of
-//new vectors.
-//NOTE: NO SEMICOLON AFTER MACROS. Semicolon will break things
-#define VECTOR_INITIAL_CAPACITY 10
-
-//First, we need a container for our new vector type.
-//We'll use a struct to contain it.
+//Our main type will be the node, which contains data (in this case,
+//an int), and pointer to node.
 
 //Forward declare my structure name. The first Vect is part of the
-//official typename (struct Vect), the second is the typedef alias
-//I.e, this typedef uses "Vect" as an alias for "struct Vect"
-//Weird, I know, but you get used to it.
-typedef struct Vect Vect;
+//official typename (struct Node), the second is the typedef alias
+//I.e, this typedef uses "Node" as an alias for "struct Node"
+//THis is particularly important, because in order to declare a
+//pointer to Node (Node *) inside the definition, the compiler
+//needs to have seen this Forward Declaration.
 
-//Now define my Vect structure.  Some people move this part to a
-//c file, or even a second header file.  I put them in the header
+typedef struct Node Node;
 
-struct Vect //Wrapper around a Vector of int
+//Now define my Vect structure. Note that the Node type will serve as
+//the container for a list node and the Node * type as the pointer to
+//a node --- and, of course and pointer to a node is also a pointer to
+//the list it is the head of, an important symmetry for our algorithms.
+
+struct Node //List node of int
 {
-    int capacity; //Total size of reserved memory on heap (number of ints)
-    int size;  //Current number of ints stored. size always <= capacity
-    int * store; //Pointer to stored array on heap
+    int value; //Data contained in node
+    int * next; //Pointer to the next node, NULL means end of list
 }; //Don't forget the semi at the end of struct definitions.
 
-//Below are the API functions for my Vector type.
+//Below are the API functions for my list type.
+//In general, unless otherwise specified, method returning Node * will
+//return the head of the modified (or not) list.
 
-int Value(Vect* v, int index); //Return the value of the item at index.
-void Add(Vect* v, int val, int verbose); //Add value to end of store.
-void Grow(Vect* v, int scale, int verbose); //Increase size by scale factor
-void Print(Vect* v, FILE * stream); //Print the content of v to stream.
+//Add in order (insert in front of first value > val).
+Node* Add(Node * head, int val);
+
+//Add to location n means node will be nth.
+//0 means add in front of head
+//n > length of the list means add at end
+//n < 0 we will interpret as 'add at end'
+Node* AddAt(Node * head, int val, int loc);
+
+//Returns a pointer to the first node with value, or NULL
+Node* Find(Node * head, int val);
+
+//Delete the node at loc.  Interpret loc as above, except
+//attempt to delete node after end of list will be ignored.
+Node* RemoveAt(Node * Head, int val, int loc);
+
+//Recursive traversal print
+void  Print (Node * head);
+
+//Recursive traversal free memory
+void  Free(Node * head);
 
 #endif
