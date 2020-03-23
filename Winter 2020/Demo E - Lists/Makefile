@@ -3,20 +3,20 @@ CFLAGS=-g -Wall
 
 all:main
 
-main: main.o vect.o
-	$(CC) main.o vect.o -o vect
+main: main.o list.o
+	$(CC) main.o list.o -o list
 
-main.o: main.c vect.h
+main.o: main.c list.h
 	$(CC) $(CFLAGS) -c main.c
 
-vect.o: vect.c vect.h
-	$(CC) $(CFLAGS) -c vect.c
+list.o: list.c list.h
+	$(CC) $(CFLAGS) -c list.c
 
 clean:
-	rm -f *.o *~ vect
+	rm -f *.o *~ list
 
 debug: all
-	cgdb ./vect
+	cgdb ./list
 
 ddd: all
-	ddd ./vect
+	ddd ./list

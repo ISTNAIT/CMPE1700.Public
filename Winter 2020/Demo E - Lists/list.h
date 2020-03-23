@@ -24,7 +24,7 @@ typedef struct Node Node;
 struct Node //List node of int
 {
     int value; //Data contained in node
-    int * next; //Pointer to the next node, NULL means end of list
+    Node * next; //Pointer to the next node, NULL means end of list
 }; //Don't forget the semi at the end of struct definitions.
 
 //Below are the API functions for my list type.
@@ -40,12 +40,15 @@ Node* Add(Node * head, int val);
 //n < 0 we will interpret as 'add at end'
 Node* AddAt(Node * head, int val, int loc);
 
+//Returns the index to the  first node with value, or negative
+int Find(Node * head, int val);
+
 //Returns a pointer to the first node with value, or NULL
-Node* Find(Node * head, int val);
+Node* FindNode(Node * head, int val);
 
 //Delete the node at loc.  Interpret loc as above, except
 //attempt to delete node after end of list will be ignored.
-Node* RemoveAt(Node * Head, int val, int loc);
+Node* RemoveAt(Node * head, int loc);
 
 //Recursive traversal print
 void  Print (Node * head);
