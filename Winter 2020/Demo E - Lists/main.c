@@ -9,6 +9,8 @@ int main(int argc, char** argv)
     //Scratch variables.
     int i = 0;
     int loc = 0;
+    Node * curr = NULL;
+
     //We'll use random numbers to illustrate the valuable
     //insert-in-order functionality.
     srand(time(NULL));
@@ -42,6 +44,12 @@ int main(int argc, char** argv)
     head = AddAt(head,999,-1);
     head = AddAt(head,555,10);
 
+    Print(head);
+
+    //Grab a reference to that 555 node to change it to 666
+    printf("Using FindNode to find and modify a node.");
+    curr = FindNode(head,555);
+    if(curr) curr->value = 666;
     Print(head);
 
     //Clean up my toys.
