@@ -37,6 +37,11 @@ typedef List * QueueL;
 
 //My standard interfaces
 
+//Generic error function, mostly for trying to read empty things:
+
+void ErrorOut(char * message);
+
+
 //Both stacks and queues can support peek (just read the value at the
 //top/front, without modifying the data.)
 
