@@ -2,8 +2,8 @@
 #ifndef STAQUEH
 #define STAQUEH
 
-#include <list.h>
-#include <vect.h>
+#include "list.h"
+#include "vect.h"
 #include <stdio.h>
 
 //Here we are implementing interfaces for:

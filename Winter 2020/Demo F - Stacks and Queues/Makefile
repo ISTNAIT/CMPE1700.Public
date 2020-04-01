@@ -9,8 +9,8 @@ main: main.o list.o vect.o staque.o
 main.o: main.c list.h vect.h staque.h
 	$(CC) $(CFLAGS) -c main.c
 
-staque.o: staque.c stack.h list.h vect.h
-	$(CC) $(CFLAGS) -c main.c
+staque.o: staque.c staque.h list.h vect.h
+	$(CC) $(CFLAGS) -c staque.c
 
 list.o: list.c list.h
 	$(CC) $(CFLAGS) -c list.c

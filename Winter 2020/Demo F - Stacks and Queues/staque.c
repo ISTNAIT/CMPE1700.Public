@@ -79,7 +79,7 @@ int Push(StackV * s, int val) //Add a value to the top of the stack.
 {
     //In our implementation, the action is at the end of the vector.
     //So we can just use our standard add.
-    Add(s, val, 0);
+    Add(*s, val, 0);
     return val;
 }
 
@@ -91,13 +91,38 @@ int Push(StackL * s, int val) //Add a value to the top of the stack.
 }
 //Queues
 
-int Dequeue(StackV * s); //Remove front item.
+int Dequeue(StackV * s) //Remove front item.
+{
+    //This is pretty easy.  We're going to map Dequeue to Pop.
+    return Pop(s);
+}
+
+Z Dequeue(StackL * s) //Remove front item.
+{
+    //This is pretty easy.  We're going to map Dequeue to Pop.
+    return Pop(s);
+}
 
 
-Z Dequeue(StackL * s); //Remove front item.
+int Enqueue(StackV * s, int val) //Add a value to the back of the queue.
+{
+    //Like push, but at the opposite end. In the case of our vector,
+    //This means I have to slide the entire set down by one.
+    //First, create a new entry at the bottom to make sure I have
+    //space. Just add a 0, because it's going to get overwritten
+    Add(*s, 0, 0);
+    //Now slide everything forward
+    for(int i = s->size-1 ; i > 0; ++i)
+        s->store[i] = s->store[i-1];
+    //Add our new value at the top
+    s->store[0] = val;
+    return val;
+}
 
-
-int Enqueue(StackV * s, int val); //Add a value to the back of the queue.
-
-
-int Enqueue(StackL * s, int val); //Add a value to the back of the queue.
+int Enqueue(StackL * s, int val) //Add a value to the back of the queue.
+{
+    //Like push, but at the opposite end.
+    //I already have insert-at-tail code, so...
+    *s = AddAt(*s , val, -1);
+    return val;
+}
