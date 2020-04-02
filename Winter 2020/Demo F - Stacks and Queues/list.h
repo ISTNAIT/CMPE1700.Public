@@ -32,7 +32,7 @@ struct Node //List node of int
 //return the head of the modified (or not) list.
 
 //Add in order (insert in front of first value > val).
-Node* Add(Node * head, int val);
+Node* AddOrdered(Node * head, int val);
 
 //Add to location n means node will be nth.
 //0 means add in front of head
@@ -51,7 +51,7 @@ Node* FindNode(Node * head, int val);
 Node* RemoveAt(Node * head, int loc);
 
 //Recursive traversal print
-void  Print (Node * head);
+void  PrintList(Node * head);
 
 //Recursive traversal free memory
 void  Free(Node * head);

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 //Add in order (insert in front of first value > val).
-Node* Add(Node * head, int val)
+Node* AddHead(Node * head, int val)
 {
     //Working pointer
     Node * curr = NULL;
@@ -149,12 +149,12 @@ Node* RemoveAt(Node * head, int loc)
 }
 
 //Recursive traversal print
-void  Print (Node * head)
+void  PrintList(Node * head)
 {
     if(head)
     {
         printf("%d->",head->value);
-        Print(head->next);
+        PrintList(head->next);
     }
     else //special case--last node
     {

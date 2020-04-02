@@ -1,60 +1,114 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include "list.h"
+#include "staque.h"
 
 
 int main(int argc, char** argv)
 {
-    //Scratch variables.
-    int i = 0;
-    int loc = 0;
-    Node * curr = NULL;
+    //Testing our stack interfaces.
 
-    //We'll use random numbers to illustrate the valuable
-    //insert-in-order functionality.
-    srand(time(NULL));
+    //Stack based on Vector
 
-    //Create a linked list
-    Node* head = NULL; //The simplest possible list is just a NULL
-                    //pointer.
+    printf("\n---------------\nStack on Vector\n---------------\n");
 
-    for (int i = 0; i < 50; ++i)
-        head = Add(head,rand()%25); //Add a random number between
-                                     //0,25. Note that because we
-                                     //might be adding a new node in
-                                     //front of the head, head might
-                                     //change and thus we need this
-                                     //head = Add() form.
-    Print(head); //Print my list contents.
+    StackV vStack = {0, 0, NULL};
+    printf("Pushing values from 1 to 50\n");
+    for (int i = 1; i < 51; ++i)
+        PushV(&vStack, i);
 
-    //Chose a random value to delete
-    i = rand()%25;
+    printf("Vector size: %d\n", SizeV(vStack));
 
-    printf("Deleting all nodes with value %d\n",i);
+    printf("Value at top: %d\n", PeekV(vStack));
 
-    while((loc = Find(head,i)) >= 0)
-        head = RemoveAt(head,loc);
+    for(int i = 0; i < 10; ++i)
+        printf("Popping %d, ", PopV(&vStack));
 
-    Print(head);
+    printf("\nValue at top: %d\n", PeekV(vStack));
 
-    printf("Adding some nodes at various spots.\n");
+    printf("Printing remaining values in vector, top to bottom.:\n");
 
-    head = AddAt(head,111,0);
-    head = AddAt(head,999,-1);
-    head = AddAt(head,555,10);
+    Print(&vStack, stdout);
 
-    Print(head);
+    //Stack based on List
 
-    //Grab a reference to that 555 node to change it to 666
-    printf("Using FindNode to find and modify a node.");
-    curr = FindNode(head,555);
-    if(curr) curr->value = 666;
-    Print(head);
+    printf("\n---------------\n Stack on List \n---------------\n");
+
+    StackL lStack = NULL;
+    printf("Pushing values from 1 to 50\n");
+    for (int i = 1; i < 51; ++i)
+        PushL(&lStack, i);
+
+    printf("Vector size: %d\n", SizeL(lStack));
+
+    printf("Value at top: %d\n", PeekL(lStack));
+
+    for(int i = 0; i < 10; ++i)
+        printf("Popping %d, ", PopL(&lStack));
+
+    printf("\nValue at top: %d\n", PeekL(lStack));
+
+    printf("Printing remaining values in list, front to back:\n");
+
+    PrintList(lStack);
 
 
-    //Clean up my toys.
-    Free(head);
+    //And now for the Queue
+
+    //Queue based on Vector
+    printf("\n---------------\nQueue on Vector\n---------------\n");
+
+    QueueV vQueue = {0, 0, NULL};
+    printf("Enqueuing values from 1 to 50\n");
+    for (int i = 1; i < 51; ++i)
+        EnqueueV(&vQueue, i);
+
+    printf("Vector size: %d\n", SizeV(vQueue));
+
+    printf("Value at front: %d\n", PeekV(vQueue));
+
+    for(int i = 0; i < 10; ++i)
+        printf("Dequeuing %d, ", DequeueV(&vQueue));
+
+    printf("\nValue at front: %d\n", PeekV(vQueue));
+
+    printf("Printing remaining values in vector, top to bottom:\n");
+
+    Print(&vQueue, stdout);
+
+    //Queue based on List
+    printf("\n---------------\n Queue on List \n---------------\n");
+
+    QueueL lQueue = NULL;
+    printf("Enqueuing values from 1 to 50\n");
+    for (int i = 1; i < 51; ++i)
+        EnqueueL(&lQueue, i);
+
+    printf("List size: %d\n", SizeL(lQueue));
+
+    printf("Value at front: %d\n", PeekL(lQueue));
+
+    for(int i = 0; i < 10; ++i)
+        printf("Dequeuing %d, ", DequeueL(&lQueue));
+
+    printf("\nValue at front: %d\n", PeekL(lQueue));
+
+    printf("Printing remaining values list, front to back:\n");
+
+    PrintList(lQueue);
+
+    //Clean up toys
+    if(vStack.store) free (vStack.store);
+    vStack.store = NULL;
+
+    if(lStack) Free(lStack);
+    lStack = NULL;
+
+    if(vQueue.store) free (vQueue.store);
+    vQueue.store = NULL;
+
+    if(lQueue) Free(lQueue);
+    lQueue = NULL;
 
     return EXIT_SUCCESS;
 }

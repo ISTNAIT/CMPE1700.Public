@@ -24,15 +24,15 @@
 //Use some typedefs for the sake of keeping names clear:
 
 typedef Vect StackV;
-typedef List * StackL; //Since I will always be handling the StackL as
+typedef Node * StackL; //Since I will always be handling the StackL as
                        //a pointer, hide the * in the typedef.  Some
                        //consider this bad practice.  YMMV. I'm doing
                        //it here to show you that we can have
                        //identical interfaces for both List-based and
                        //Vector-based implementations.
 
-tyepedef Vect QueueV;
-typedef List * QueueL;
+typedef Vect QueueV;
+typedef Node * QueueL;
 
 
 //My standard interfaces
@@ -45,17 +45,17 @@ void ErrorOut(char * message);
 //Both stacks and queues can support peek (just read the value at the
 //top/front, without modifying the data.)
 
-int Peek(List * l); //Because of the magic of overloading and typedef,
+int PeekL(Node * l); //Because of the magic of overloading and typedef,
                  //this will actually be called for both StackL and
                  //QueueL
-int Peek(Vect v); //As above, but for StackV and QueueV
+int PeekV(Vect v); //As above, but for StackV and QueueV
 
 
-int Empty(List * l); //Returns 0 unless list is empty. Used for checking.
-int Empty(Vect v); //Returns 0 unless vector is empty. Used for checking.
+int EmptyL(Node * l); //Returns 0 unless list is empty. Used for checking.
+int EmptyV(Vect v); //Returns 0 unless vector is empty. Used for checking.
 
-int Size(List * l); //Returns number of items in list.
-int Size(Vect v); //Returns number of items in vector.
+int SizeL(Node * l); //Returns number of items in list.
+int SizeV(Vect v); //Returns number of items in vector.
 
 //Note, because Peek does not modify the data structures, we don't
 //have to pass them by address as we do with Pop below.  However,
@@ -65,9 +65,9 @@ int Size(Vect v); //Returns number of items in vector.
 
 //Stacks
 
-int Pop(StackV* s); //Remove item from top of stack. Because this method
+int PopV(StackV* s); //Remove item from top of stack. Because this method
                   //modifies the stack, we send it by address.
-Z Pop(StackL* s); //Again, because this method modifies the stack, we
+int PopL(StackL* s); //Again, because this method modifies the stack, we
                   //send it by address.  *** NB: Remember that StackL
                   //is already a pointer (List*), so StackL* is
                   //actually List** (pointer-to-pointer-to-int).  This
@@ -75,17 +75,17 @@ Z Pop(StackL* s); //Again, because this method modifies the stack, we
                   //modify a pointer within a function, just as
                   //passing ordinary types by address does.
 
-int Push(StackV * s, int val); //Add a value to the top of the stack,
+int PushV(StackV * s, int val); //Add a value to the top of the stack,
                            //return the value (we could just return
                            //void, but it keeps the symmetry between
                            //Push and Pop)
-int Push(StackL * s, int val);
+int PushL(StackL * s, int val);
 
 
 //Queues
 
-int Dequeue(StackV* s); //Remove front item.
-Z Dequeue(StackL* s); //Because this method modifies the stack, we send it
+int DequeueV(StackV* s); //Remove front item.
+int DequeueL(StackL* s); //Because this method modifies the stack, we send it
                   //by address.  *** NB: Remember that StackL is
                   //already a pointer (List*), so StackL* is actually
                   //List** (pointer-to-pointer-to-int).  This is
@@ -93,10 +93,10 @@ Z Dequeue(StackL* s); //Because this method modifies the stack, we send it
                   //modify a pointer within a function, just as
                   //passing ordinary types by address does.
 
-int Enqueue(StackV * s, int val); //Add a value to the top of the stack,
+int EnqueueV(StackV * s, int val); //Add a value to the top of the stack,
                            //return the value (we could just return
                            //void, but it keeps the symmetry between
                            //Push and Pop)
-int Enqueue(StackL * s, int val);
+int EnqueueL(StackL * s, int val);
 
 #endif
