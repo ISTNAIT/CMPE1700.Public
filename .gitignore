@@ -118,3 +118,5 @@ Fall 2018/Demo 3/Demo 3/Demo 3.vcxproj.filters
 *.db
 *.opendb
 *.vcxproj
+
+.DS_Store
